@@ -1,4 +1,4 @@
-```
+
 # 📚 Plagiarism Checker: AI vs Traditional + Web Detection
 
 A powerful and interactive plagiarism detection tool built using **Streamlit**, combining traditional algorithms (like Rabin-Karp) with modern **AI-based similarity detection (BERT)**. It also performs **live web plagiarism checking** using `yake`, Google Search, and semantic comparison.
@@ -19,7 +19,6 @@ A powerful and interactive plagiarism detection tool built using **Streamlit**, 
 
 ## 📁 Project Structure
 
-```
 .
 ├── app.py                        # Main Streamlit application
 ├── scraped_data/                # Folder where scraped articles are saved
