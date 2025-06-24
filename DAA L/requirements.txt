@@ -1,0 +1,9 @@
+streamlit
+wikipedia
+sentence-transformers<3.0
+scikit-learn
+protobuf==3.20.3
+transformers<4.39.0
+newspaper3k
+requests
+beautifulsoup4
