@@ -19,7 +19,7 @@ A powerful and interactive plagiarism detection tool built using **Streamlit**, 
 
 ## 📁 Project Structure
 
-.
+```
 ├── app.py                        # Main Streamlit application
 ├── scraped_data/                # Folder where scraped articles are saved
 ├── utils/
@@ -28,6 +28,7 @@ A powerful and interactive plagiarism detection tool built using **Streamlit**, 
 │   ├── traditional.py           # Rabin-Karp similarity
 │   └── web_plagiarism.py        # Web search and similarity check
 └── requirements.txt             # Python dependencies
+```
 
 ## ✅ Requirements
 
