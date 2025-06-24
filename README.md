@@ -28,9 +28,9 @@ A powerful and interactive plagiarism detection tool built using **Streamlit**, 
 │   ├── traditional.py           # Rabin-Karp similarity
 │   └── web_plagiarism.py        # Web search and similarity check
 └── requirements.txt             # Python dependencies
+
 ```
 
----
 
 ## ✅ Requirements
 
@@ -38,7 +38,7 @@ Make sure Python 3.8+ is installed.
 
 ### Install dependencies
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
@@ -100,4 +100,3 @@ streamlit run app.py
 - [YAKE](https://github.com/LIAAD/yake)
 
 ---
-```
