@@ -29,9 +29,6 @@ A powerful and interactive plagiarism detection tool built using **Streamlit**, 
 │   └── web_plagiarism.py        # Web search and similarity check
 └── requirements.txt             # Python dependencies
 
-```
-
-
 ## ✅ Requirements
 
 Make sure Python 3.8+ is installed.
@@ -83,7 +80,7 @@ googlesearch-python
 
 ## 📦 Run the App
 
-```bash
+```
 streamlit run app.py
 ```
 
