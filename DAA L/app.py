@@ -6,15 +6,20 @@ import time
 import pandas as pd
 
 from utils.scraper import scrape_articles
-from utils.traditional import rabin_karp_similarity
+from utils.traditional import rabin_karp_similarity, boyer_moore_similarity
 from utils.ai_similarity import bert_similarity
 from utils.web_plagiarism import check_web_plagiarism
 
 # App setup
-st.set_page_config(page_title="Plagiarism Checker", layout="wide")
+st.set_page_config(
+    page_title="Plagiarism Checker",
+    page_icon="📚",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 st.title("📚 Plagiarism Checker: AI vs Traditional + Web Detection")
 
-# Ensure scraped_data directory exists
 os.makedirs("scraped_data", exist_ok=True)
 
 # Sidebar: Input method
@@ -43,7 +48,6 @@ if topic_list:
         else:
             st.warning("⚠️ Scraping failed. Check the topic names.")
 
-# Display scraped files and download
 scraped_list = os.listdir("scraped_data")
 if scraped_list:
     with st.expander("📂 Scraped Articles"):
@@ -68,34 +72,32 @@ if user_text and scraped_list:
             st.error(f"Could not read {file}: {e}")
             continue
 
-        start_rk = time.time()
         rk_score = rabin_karp_similarity(user_text, source_text)
-        rk_time = time.time() - start_rk
+        bm_score = boyer_moore_similarity(user_text, source_text)
 
-        start_bert = time.time()
         try:
             bert_score = bert_similarity(user_text, source_text)
         except Exception as e:
             bert_score = 0.0
             st.error(f"BERT similarity failed for {file}: {e}")
-        bert_time = time.time() - start_bert
 
         results.append({
             "Source": file,
             "Rabin-Karp (%)": rk_score,
-            "Rabin-Karp Time (s)": rk_time,
-            "BERT (%)": bert_score,
-            "BERT Time (s)": bert_time
+            "Boyer-Moore (%)": bm_score,
+            "BERT (%)": bert_score
         })
 
     df = pd.DataFrame(results)
     st.dataframe(df.style.format({
         "Rabin-Karp (%)": "{:.2f}",
-        "Rabin-Karp Time (s)": "{:.3f}",
-        "BERT (%)": "{:.2f}",
-        "BERT Time (s)": "{:.3f}"
+        "Boyer-Moore (%)": "{:.2f}",
+        "BERT (%)": "{:.2f}"
     }))
-    st.bar_chart(df.set_index("Source")[["Rabin-Karp (%)", "BERT (%)"]])
+
+    st.bar_chart(df.set_index("Source")[[
+        "Rabin-Karp (%)", "Boyer-Moore (%)", "BERT (%)"
+    ]])
 
 # Web Plagiarism Detection
 if user_text:
@@ -113,6 +115,5 @@ if user_text:
         else:
             st.warning("⚠️ No strong matches found online.")
 
-# Footer
 st.markdown("---")
 st.caption("Developed with Streamlit | AI + Traditional Plagiarism Detection")
